@@ -22,7 +22,16 @@ class MyApp extends StatelessWidget {
               final babies = Babies(age: dogAge);
               return babies.getBabies();
             },
-            initialData: 0)
+            initialData: 0),
+        StreamProvider(
+            create: (context) {
+              final int dogAge = context.read<Dog>().age;
+              //watch의 경우 create는 한번만 실행에서 걸린다.
+              // final int dogAge = context.watch<Dog>().age;
+              final babies = Babies(age: dogAge * 2);
+              return babies.bark();
+            },
+            initialData: 'Bark 0 times'),
       ],
       child: MaterialApp(
           title: 'Provider 06',
@@ -113,6 +122,12 @@ class Age extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
+          const SizedBox(
+            height: 10,
+          ),
+          // read는 변화가 반영되지 않음.
+          // Text('- ${context.read<String>()}'),
+          Text('- ${context.watch<String>()}'),
           ElevatedButton(
             onPressed: () => context.read<Dog>().grow(),
             child: const Text('Grow'),
