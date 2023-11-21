@@ -21,11 +21,15 @@ class _ProxyCreateUpdateState extends State<ProxyCreateUpdate> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('ProxyProvider Update'),
+        title: const Text('ProxyProvider Create Update'),
       ),
       body: Center(
-        child: ProxyProvider0(
-          update: (_, __) => Translations(counter),
+        child: ProxyProvider0<Translations>(
+          create: (_) => Translations(),
+          update: (_, Translations? translations) {
+            translations!.update(counter);
+            return translations;
+          },
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -43,9 +47,12 @@ class _ProxyCreateUpdateState extends State<ProxyCreateUpdate> {
 }
 
 class Translations {
-  final int _value;
-  Translations(this._value);
-  String get title => 'You clicke $_value times';
+  late int _value;
+  void update(int newValue) {
+    _value = newValue;
+  }
+
+  String get title => 'You clicked $_value times';
 }
 
 class ShowTranslations extends StatelessWidget {
@@ -53,7 +60,8 @@ class ShowTranslations extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final title = Provider.of<Translations>(context).title;
+    final title = context.watch<Translations>().title;
+    print(title);
     return Text(
       title,
       style: const TextStyle(fontSize: 28),

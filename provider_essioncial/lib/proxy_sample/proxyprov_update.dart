@@ -24,7 +24,7 @@ class _ProxyProvUpdateState extends State<ProxyProvUpdate> {
         title: const Text('ProxyProvider Update'),
       ),
       body: Center(
-        child: ProxyProvider0(
+        child: ProxyProvider0<Translations>(
           update: (_, __) => Translations(counter),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

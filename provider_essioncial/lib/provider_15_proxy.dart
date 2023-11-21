@@ -63,7 +63,7 @@ class MyHomePage extends StatelessWidget {
                   ),
                 ),
                 child: const Text(
-                  'Proxy Create\nUpdate',
+                  'Proxy\nCreateUpdate',
                   style: TextStyle(fontSize: 20),
                   textAlign: TextAlign.center,
                 ),
