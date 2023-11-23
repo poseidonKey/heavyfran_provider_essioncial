@@ -13,7 +13,7 @@ class _ProxyCreateUpdateState extends State<ProxyCreateUpdate> {
   void increment() {
     setState(() {
       counter++;
-      print('counter : $counter');
+      // print('counter : $counter');
     });
   }
 
@@ -61,7 +61,7 @@ class ShowTranslations extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final title = context.watch<Translations>().title;
-    print(title);
+    print('showTranslations: $title');
     return Text(
       title,
       style: const TextStyle(fontSize: 28),
